@@ -98,10 +98,6 @@ module Jenkins
       while build_result.nil? and timeout_countdown > 0
         begin
             build_response = perform_request(job_progress_url, :get)
-            puts "Job progress response: #{build_response.body}"
-            puts "Job progress response code: #{build_response.code}"
-            puts "Job progress response headers: #{build_response.headers}"
-            puts "Job progress url: #{job_progress_url}"
             result = JSON.parse(build_response)['result']
             build_result = result || build_result
         rescue

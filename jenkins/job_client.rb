@@ -89,8 +89,9 @@ module Jenkins
 
     def job_progress(job_run_url, job_timeout = DEFAULT_TIMEOUT)
       job_timeout = job_timeout.to_i if job_timeout.is_a? String
-      job_progress_url = "#{job_run_url}api/json"
-      job_log_url = "#{job_run_url}logText/progressiveText"
+      new_job_run_url = job_run_url.gsub("https://jenkins.sysdig.teleport.sh", jenkins_url.chomp('/'))
+      job_progress_url = "#{new_job_run_url}api/json"
+      job_log_url = "#{new_job_run_url}logText/progressiveText"
       build_response = nil
       build_result = nil
       timeout_countdown = job_timeout
